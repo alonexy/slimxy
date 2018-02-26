@@ -1,0 +1,7 @@
+.idea/
+.git/
+.svn/
+.DS_Store
+vendor
+node_modules
+
