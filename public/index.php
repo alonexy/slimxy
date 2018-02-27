@@ -1,5 +1,5 @@
 <?php
-require '../vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 //phpinfo();
 $container = new \Slim\Container;
 $container['logger'] = function($c) {
@@ -23,7 +23,6 @@ $container['view'] = function ($c) {
     // Instantiate and add Slim specific extension
     $basePath = rtrim(str_ireplace('index.php', '', $c['request']->getUri()->getBasePath()), '/');
     $view->addExtension(new \Slim\Views\TwigExtension($c['router'], $basePath));
-
     return $view;
 };
 //配置更新
@@ -33,7 +32,7 @@ if(!in_array($env,['local','production','test'])){
     $error = 'Set Nginx fastcgi_param  APP_ENV  in (local,production,test)';
     throw new Exception($error);
 }
-$config = require '../Configs/'.$env.'.php';
+$config = require __DIR__.'/../Configs/'.$env.'.php';
 $settings->replace($config);
 $app = new \Slim\App($container);
 require '../routes.php';
