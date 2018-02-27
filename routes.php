@@ -8,4 +8,5 @@
 
 $app->group('', function() {
     $this->get('/test',\Controller\TestController::class.':Index');
+    $this->get('/test_view',\Controller\TestController::class.':TestView')->setName('profile');
 })->add( new \Middlewares\ExampleMiddleware() );

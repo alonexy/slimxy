@@ -15,12 +15,16 @@ class BaseController
     protected $requests;
     protected $container;
     protected $db;
+    protected $view;
 
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
         if($this->container->has('db')){
             $this->db = $this->container->get('db');
+        }
+        if($this->container->has('view')){
+            $this->view = $this->container->get('view');
         }
     }
 }

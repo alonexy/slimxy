@@ -24,4 +24,10 @@ class TestController extends BaseController
         }
         return $response->withJson(['list'=>$data,'msg'=>'fail']);
     }
+    public function TestView($request, $response){
+        $name = $request->getQueryParam('name',false);
+        return $this->view->render($response, 'test.php', [
+            'name' => $name
+        ]);
+    }
 }
