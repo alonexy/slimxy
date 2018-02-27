@@ -20,7 +20,6 @@ $container['view'] = function ($c) {
     $view = new \Slim\Views\Twig('../Templates', [
         'cache' => false
     ]);
-
     // Instantiate and add Slim specific extension
     $basePath = rtrim(str_ireplace('index.php', '', $c['request']->getUri()->getBasePath()), '/');
     $view->addExtension(new \Slim\Views\TwigExtension($c['router'], $basePath));
@@ -29,17 +28,13 @@ $container['view'] = function ($c) {
 };
 //配置更新
 $settings = $container->get('settings');
-$settings->replace([
-    'displayErrorDetails' => true,
-    'determineRouteBeforeAppMiddleware' => true,
-    'debug' => true,
-    'db'=>[
-        'host'=>'127.0.0.1',
-        'dbname'=>'push',
-        'user'=>'root',
-        'pass'=>'',
-    ]
-]);
+$env = getenv('APP_ENV');
+if(!in_array($env,['local','production','test'])){
+    $error = 'Set Nginx fastcgi_param  APP_ENV  in (local,production,test)';
+    throw new Exception($error);
+}
+$config = require '../Configs/'.$env.'.php';
+$settings->replace($config);
 $app = new \Slim\App($container);
 require '../routes.php';
 $app->run();
