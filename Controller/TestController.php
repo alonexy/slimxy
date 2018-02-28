@@ -14,8 +14,7 @@ class TestController extends BaseController
 {
     public function Index($request, $response, $args)
     {
-        $ext = new TestFactory();
-        $ext = $ext::ExtensionInit();
+        $ext = TestFactory::ExtensionInit();
         $ext->beforeAction($request);
         $selectStatement = $this->db->select()
             ->from('users')
