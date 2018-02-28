@@ -7,9 +7,12 @@
         "slim/twig-view": "^2.3"
     },
     "autoload": {
+        "psr-4": {
+            "Services\\": "Services/",
+            "Controller\\":"Controller"
+        },
         "classmap" : [
-            "Controller",
-            "Middlewares"
+            "Middlewares/"
         ]
     }
 }

@@ -25,6 +25,13 @@ $container['view'] = function ($c) {
     $view->addExtension(new \Slim\Views\TwigExtension($c['router'], $basePath));
     return $view;
 };
+$container['errorHandler'] = function ($c) {
+    return function ($request, $response, $exception) use ($c) {
+        return $c['response']->withStatus(500)
+            ->withHeader('Content-Type', 'text/html')
+            ->write('Something went wrong!');
+    };
+};
 //配置更新
 $settings = $container->get('settings');
 $env = getenv('APP_ENV');
