@@ -41,6 +41,9 @@ if(!in_array($env,['local','production','test'])){
 }
 $config = require __DIR__.'/../Configs/'.$env.'.php';
 $settings->replace($config);
+/**
+ * --------------------------------
+ */
 $app = new \Slim\App($container);
 require '../routes.php';
 $app->run();

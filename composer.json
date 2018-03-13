@@ -4,12 +4,17 @@
         "monolog/monolog": "^1.23",
         "slim/php-view": "^2.2",
         "slim/pdo": "~1.10",
-        "slim/twig-view": "^2.3"
+        "slim/twig-view": "^2.3",
+        "tuupola/cors-middleware": "^0.5.2",
+	 "chrisboulton/php-resque": "1.2.x",
+        "chadicus/slim-oauth2-middleware": "^3.2",
+        "phpmailer/phpmailer": "^6.0"
     },
     "autoload": {
         "psr-4": {
             "Services\\": "Services/",
-            "Controller\\":"Controller"
+            "Controller\\":"Controller",
+            "Model\\":"Model"
         },
         "classmap" : [
             "Middlewares/"

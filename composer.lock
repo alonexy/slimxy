@@ -4,8 +4,269 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5138053af91c608dc58ac14766387609",
+    "content-hash": "0988768a3348242dfef1f69bb01ffd29",
     "packages": [
+        {
+            "name": "bshaffer/oauth2-server-php",
+            "version": "v1.10.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bshaffer/oauth2-server-php.git",
+                "reference": "d158878425392fe5a0cc34f15dbaf46315ae0ed9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/bshaffer/oauth2-server-php/d158878425392fe5a0cc34f15dbaf46315ae0ed9.zip",
+                "reference": "d158878425392fe5a0cc34f15dbaf46315ae0ed9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "aws/aws-sdk-php": "~2.8",
+                "firebase/php-jwt": "~2.2",
+                "mongodb/mongodb": "^1.1",
+                "phpunit/phpunit": "^4.0",
+                "predis/predis": "dev-master",
+                "thobbs/phpcassa": "dev-master"
+            },
+            "suggest": {
+                "aws/aws-sdk-php": "~2.8 is required to use DynamoDB storage",
+                "firebase/php-jwt": "~2.2 is required to use JWT features",
+                "mongodb/mongodb": "^1.1 is required to use MongoDB storage",
+                "predis/predis": "Required to use Redis storage",
+                "thobbs/phpcassa": "Required to use Cassandra storage"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "OAuth2": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Brent Shaffer",
+                    "email": "bshafs@gmail.com",
+                    "homepage": "http://brentertainment.com"
+                }
+            ],
+            "description": "OAuth2 Server for PHP",
+            "homepage": "http://github.com/bshaffer/oauth2-server-php",
+            "keywords": [
+                "auth",
+                "oauth",
+                "oauth2"
+            ],
+            "time": "2017-11-15T01:41:02+00:00"
+        },
+        {
+            "name": "chadicus/psr-middleware",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chadicus/psr-middleware.git",
+                "reference": "8a5a9b409bebba6a8feaddeea4766f7a0eca9214"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/chadicus/psr-middleware/8a5a9b409bebba6a8feaddeea4766f7a0eca9214.zip",
+                "reference": "8a5a9b409bebba6a8feaddeea4766f7a0eca9214",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0",
+                "psr/http-message": "^1.0"
+            },
+            "require-dev": {
+                "chadicus/coding-standard": "^1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Chadicus\\Psr\\Middleware\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chad Gray",
+                    "email": "chadwickgray@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Foundational interface for PSR-7 middleware",
+            "keywords": [
+                "middleware",
+                "psr"
+            ],
+            "time": "2016-09-29T15:29:40+00:00"
+        },
+        {
+            "name": "chadicus/slim-oauth2-http",
+            "version": "v3.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chadicus/slim-oauth2-http.git",
+                "reference": "9853b0b6061b81162a9125b7773927fb259394ea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/chadicus/slim-oauth2-http/9853b0b6061b81162a9125b7773927fb259394ea.zip",
+                "reference": "9853b0b6061b81162a9125b7773927fb259394ea",
+                "shasum": ""
+            },
+            "require": {
+                "bshaffer/oauth2-server-php": "^1.8",
+                "php": "^5.6 || ^7.0",
+                "zendframework/zend-diactoros": ">=1.3.2"
+            },
+            "require-dev": {
+                "chadicus/coding-standard": "^1.3",
+                "php-coveralls/php-coveralls": "^1.0",
+                "phpunit/phpunit": "^5.7"
+            },
+            "suggest": {
+                "chadicus/slim-oauth2-middleware": "Adds OAuth2 middleware for API requests.",
+                "chadicus/slim-oauth2-routes": "Offers standard OAuth2 routes for slim applications"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Chadicus\\Slim\\OAuth2\\Http\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chad Gray",
+                    "email": "chadwickgray@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Bridge components for PSR-7 and bshaffer's OAuth2 Server http messages.",
+            "keywords": [
+                "Bridge",
+                "http",
+                "message",
+                "oauth2",
+                "psr7",
+                "request",
+                "response",
+                "slim"
+            ],
+            "time": "2018-01-07T21:28:56+00:00"
+        },
+        {
+            "name": "chadicus/slim-oauth2-middleware",
+            "version": "v3.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chadicus/slim-oauth2-middleware.git",
+                "reference": "255bf832890ac34670b1fe924df85643917b0d50"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/chadicus/slim-oauth2-middleware/255bf832890ac34670b1fe924df85643917b0d50.zip",
+                "reference": "255bf832890ac34670b1fe924df85643917b0d50",
+                "shasum": ""
+            },
+            "require": {
+                "bshaffer/oauth2-server-php": "^1.9",
+                "chadicus/psr-middleware": "^1.0",
+                "chadicus/slim-oauth2-http": "^3.1",
+                "container-interop/container-interop": "^1.1",
+                "php": "^5.6 || ^7.0",
+                "psr/http-message": "^1.0"
+            },
+            "require-dev": {
+                "chadicus/coding-standard": "^1.3",
+                "php-coveralls/php-coveralls": "^1.0",
+                "php-di/php-di": "^5.4",
+                "phpunit/phpunit": "^5.7",
+                "zendframework/zend-diactoros": ">=1.3.2"
+            },
+            "suggest": {
+                "chadicus/slim-oauth2-routes": "Offers standard OAuth2 routes for slim applications"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Chadicus\\Slim\\OAuth2\\Middleware\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chad Gray",
+                    "email": "chadwickgray@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "OAuth2 middleware for use within a Slim Framework API",
+            "keywords": [
+                "middleware",
+                "oauth2",
+                "slim"
+            ],
+            "time": "2018-01-07T23:55:56+00:00"
+        },
+        {
+            "name": "chrisboulton/php-resque",
+            "version": "1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chrisboulton/php-resque.git",
+                "reference": "0549d6c88a4aed934655b7c03b6153349d6c3ad0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/chrisboulton/php-resque/0549d6c88a4aed934655b7c03b6153349d6c3ad0.zip",
+                "reference": "0549d6c88a4aed934655b7c03b6153349d6c3ad0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Resque": "lib"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Boulton",
+                    "email": "chris@bigcommerce.com"
+                }
+            ],
+            "description": "Redis backed library for creating background jobs and processing them later. Based on resque for Ruby.",
+            "homepage": "http://www.github.com/chrisboulton/php-resque/",
+            "keywords": [
+                "background",
+                "job",
+                "redis",
+                "resque"
+            ],
+            "time": "2012-10-13T07:28:16+00:00"
+        },
         {
             "name": "container-interop/container-interop",
             "version": "1.2.0",
@@ -116,6 +377,61 @@
             "time": "2017-06-19T01:22:40+00:00"
         },
         {
+            "name": "neomerx/cors-psr7",
+            "version": "v1.0.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/neomerx/cors-psr7.git",
+                "reference": "24944f39483d1a89f66ae9d58cca9f82b8815b35"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/neomerx/cors-psr7/24944f39483d1a89f66ae9d58cca9f82b8815b35.zip",
+                "reference": "24944f39483d1a89f66ae9d58cca9f82b8815b35",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0",
+                "psr/http-message": "^1.0",
+                "psr/log": "^1.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.9",
+                "phpunit/phpunit": "^5.7",
+                "scrutinizer/ocular": "^1.1",
+                "squizlabs/php_codesniffer": "^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Neomerx\\Cors\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "neomerx",
+                    "email": "info@neomerx.com"
+                }
+            ],
+            "description": "Framework agnostic (PSR-7) CORS implementation (www.w3.org/TR/cors/)",
+            "homepage": "https://github.com/neomerx/cors-psr7",
+            "keywords": [
+                "Cross Origin Resource Sharing",
+                "Cross-Origin Resource Sharing",
+                "cors",
+                "neomerx",
+                "psr-7",
+                "psr7",
+                "w3.org",
+                "www.w3.org"
+            ],
+            "time": "2017-09-03T22:31:57+00:00"
+        },
+        {
             "name": "nikic/fast-route",
             "version": "v1.3.0",
             "source": {
@@ -160,6 +476,72 @@
                 "routing"
             ],
             "time": "2018-02-13T20:26:39+00:00"
+        },
+        {
+            "name": "phpmailer/phpmailer",
+            "version": "v6.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPMailer/PHPMailer.git",
+                "reference": "44d49bab5ab1fef721d3ee07e75dc0865ddf4cc6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/PHPMailer/PHPMailer/44d49bab5ab1fef721d3ee07e75dc0865ddf4cc6.zip",
+                "reference": "44d49bab5ab1fef721d3ee07e75dc0865ddf4cc6",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ctype": "*",
+                "ext-filter": "*",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "doctrine/annotations": "1.2.*",
+                "friendsofphp/php-cs-fixer": "^2.2",
+                "phpdocumentor/phpdocumentor": "2.*",
+                "phpunit/phpunit": "^4.8 || ^5.7",
+                "zendframework/zend-eventmanager": "3.0.*",
+                "zendframework/zend-i18n": "2.7.3",
+                "zendframework/zend-serializer": "2.7.*"
+            },
+            "suggest": {
+                "ext-mbstring": "Needed to send email in multibyte encoding charset",
+                "hayageek/oauth2-yahoo": "Needed for Yahoo XOAUTH2 authentication",
+                "league/oauth2-google": "Needed for Google XOAUTH2 authentication",
+                "psr/log": "For optional PSR-3 debug logging",
+                "stevenmaguire/oauth2-microsoft": "Needed for Microsoft XOAUTH2 authentication",
+                "symfony/polyfill-mbstring": "To support UTF-8 if the Mbstring PHP extension is not enabled (^1.2)"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PHPMailer\\PHPMailer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Jim Jagielski",
+                    "email": "jimjag@gmail.com"
+                },
+                {
+                    "name": "Marcus Bointon",
+                    "email": "phpmailer@synchromedia.co.uk"
+                },
+                {
+                    "name": "Andy Prevost",
+                    "email": "codeworxtech@users.sourceforge.net"
+                },
+                {
+                    "name": "Brent R. Matzelle"
+                }
+            ],
+            "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
+            "time": "2018-01-05T13:19:58+00:00"
         },
         {
             "name": "pimple/pimple",
@@ -633,17 +1015,67 @@
             "time": "2018-01-30T19:27:44+00:00"
         },
         {
-            "name": "twig/twig",
-            "version": "v2.4.4",
+            "name": "tuupola/cors-middleware",
+            "version": "0.5.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/twigphp/Twig.git",
-                "reference": "eddb97148ad779f27e670e1e3f19fb323aedafeb"
+                "url": "https://github.com/tuupola/cors-middleware.git",
+                "reference": "db69d8e67b99570b16e8cd5f78c423ed1167cb21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/twigphp/Twig/eddb97148ad779f27e670e1e3f19fb323aedafeb.zip",
-                "reference": "eddb97148ad779f27e670e1e3f19fb323aedafeb",
+                "url": "https://files.phpcomposer.com/files/tuupola/cors-middleware/db69d8e67b99570b16e8cd5f78c423ed1167cb21.zip",
+                "reference": "db69d8e67b99570b16e8cd5f78c423ed1167cb21",
+                "shasum": ""
+            },
+            "require": {
+                "neomerx/cors-psr7": "^1.0",
+                "php": "^5.5 || ^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8",
+                "squizlabs/php_codesniffer": "^2.5",
+                "zendframework/zend-diactoros": "^1.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tuupola\\Middleware\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mika Tuupola",
+                    "email": "tuupola@appelsiini.net",
+                    "homepage": "http://www.appelsiini.net/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PSR-7 CORS Middleware",
+            "homepage": "https://github.com/tuupola/cors-middleware",
+            "keywords": [
+                "cors",
+                "middleware",
+                "slim"
+            ],
+            "time": "2016-08-12T13:12:58+00:00"
+        },
+        {
+            "name": "twig/twig",
+            "version": "v2.4.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "d2117ec118c1ff3d28ccddca8212d82787a4809f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/twigphp/Twig/d2117ec118c1ff3d28ccddca8212d82787a4809f.zip",
+                "reference": "d2117ec118c1ff3d28ccddca8212d82787a4809f",
                 "shasum": ""
             },
             "require": {
@@ -696,7 +1128,59 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2017-09-27T18:10:31+00:00"
+            "time": "2018-03-03T16:23:01+00:00"
+        },
+        {
+            "name": "zendframework/zend-diactoros",
+            "version": "1.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-diactoros.git",
+                "reference": "bf26aff803a11c5cc8eb7c4878a702c403ec67f1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/zendframework/zend-diactoros/bf26aff803a11c5cc8eb7c4878a702c403ec67f1.zip",
+                "reference": "bf26aff803a11c5cc8eb7c4878a702c403ec67f1",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0",
+                "psr/http-message": "^1.0"
+            },
+            "provide": {
+                "psr/http-message-implementation": "1.0"
+            },
+            "require-dev": {
+                "ext-dom": "*",
+                "ext-libxml": "*",
+                "phpunit/phpunit": "^5.7.16 || ^6.0.8",
+                "zendframework/zend-coding-standard": "~1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.7.x-dev",
+                    "dev-develop": "1.8.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Zend\\Diactoros\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "description": "PSR HTTP Message implementations",
+            "homepage": "https://github.com/zendframework/zend-diactoros",
+            "keywords": [
+                "http",
+                "psr",
+                "psr-7"
+            ],
+            "time": "2018-02-26T15:44:50+00:00"
         }
     ],
     "packages-dev": [],

@@ -12,9 +12,6 @@ class TestFactory {
         $exts = new \Services\ServicesInterfaceExtension();
         // 添加扩展
         $exts->addExtension(new \Services\Test\CheckTest());
-        $exts->addExtension(new \Services\Test\CheckTest2());
-        $exts->addExtension(new \Services\Test\CheckTest3());
-        $exts->addExtension(new \Services\Test\CheckTest4());
         return $exts;
     }
 }
