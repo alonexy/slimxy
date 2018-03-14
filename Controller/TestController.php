@@ -51,32 +51,36 @@ class TestController extends BaseController
         $url = 'https://whois.bj.baidubce.com/whois?ie=utf-8&oe=utf-8&format=javascript&domain=lywb.com&_='.time();
         $json = $this->curlGet($url);
         $data = json_decode($json,1);
-        if(isset($data['status']) && ($data['status'] == 'UNREGISTERED')){
-            $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
-            try {
-                //Server settings
-                $mail->SMTPDebug = 0;                                 // Enable verbose debug output
-                $mail->isSMTP();                                      // Set mailer to use SMTP
-                $mail->Host = 'smtp.qq.com';  // Specify main and backup SMTP servers
-                $mail->SMTPAuth = true;                               // Enable SMTP authentication
-                $mail->Username = 'link_xy@qq.com';                 // SMTP username
-                $mail->Password = 'xxx';                           // SMTP password
-                $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
-                $mail->Port = 465;                                    // TCP port to connect to
+        if(isset($data['data']['status'])){
+            if($data['data']['status'] == 'UNREGISTERED'){
+                $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+                try {
+                    //Server settings
+                    $mail->SMTPDebug = 0;                                 // Enable verbose debug output
+                    $mail->isSMTP();                                      // Set mailer to use SMTP
+                    $mail->Host = 'smtp.qq.com';  // Specify main and backup SMTP servers
+                    $mail->SMTPAuth = true;                               // Enable SMTP authentication
+                    $mail->Username = 'link_xy@qq.com';                 // SMTP username
+                    $mail->Password = '';                           // SMTP password
+                    $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+                    $mail->Port = 465;                                    // TCP port to connect to
 
-                //Recipients
-                $mail->setFrom('455367282@qq.com', 'ALonexy');    // Add a recipient
-                $mail->addAddress('961610358@qq.com');
+                    //Recipients
+                    $mail->setFrom('455367282@qq.com', 'ALonexy');    // Add a recipient
+                    $mail->addAddress('961610358@qq.com');
 
-                //Content
-                $mail->isHTML(true);                                  // Set email format to HTML
-                $mail->Subject = '域名监控报告';
-                $mail->Body    =  'www.lywb.com 已到期快去注册';
+                    //Content
+                    $mail->isHTML(true);                                  // Set email format to HTML
+                    $mail->Subject = '域名监控报告';
+                    $mail->Body    =  'www.lywb.com 已到期快去注册 https://wanwang.aliyun.com/domain/searchresult/?keyword=lywb.com&suffix=.com#/?keyword=lywb&suffix=com   Detail:'.$json;
 
-                $mail->send();
-                echo 'Message has been sent';
-            } catch (\Exception $e) {
-                echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+                    $mail->send();
+                    echo "Ok \n";
+                } catch (\Exception $e) {
+                    echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+                }
+            }else{
+                echo "Wait!!!\n";
             }
         }
 
