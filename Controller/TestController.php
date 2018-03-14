@@ -47,8 +47,9 @@ class TestController extends BaseController
         curl_close($curl);
         return $result;
     }
-    public function MonitorDomain(){
-        $url = 'https://whois.bj.baidubce.com/whois?ie=utf-8&oe=utf-8&format=javascript&domain=lywb.com&_='.time();
+    public function MonitorDomain($request, $response){
+        $name = $request->getQueryParam('name','lywb.com');
+        $url = 'https://whois.bj.baidubce.com/whois?ie=utf-8&oe=utf-8&format=javascript&domain='.$name.'&_='.time();
         $json = $this->curlGet($url);
         $data = json_decode($json,1);
         if(isset($data['data']['status'])){
@@ -61,7 +62,7 @@ class TestController extends BaseController
                     $mail->Host = 'smtp.qq.com';  // Specify main and backup SMTP servers
                     $mail->SMTPAuth = true;                               // Enable SMTP authentication
                     $mail->Username = 'link_xy@qq.com';                 // SMTP username
-                    $mail->Password = '';                           // SMTP password
+                    $mail->Password = 'bisctchumvxhbgjj';                           // SMTP password
                     $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
                     $mail->Port = 465;                                    // TCP port to connect to
 
@@ -72,7 +73,7 @@ class TestController extends BaseController
                     //Content
                     $mail->isHTML(true);                                  // Set email format to HTML
                     $mail->Subject = '域名监控报告';
-                    $mail->Body    =  'www.lywb.com 已到期快去注册 https://wanwang.aliyun.com/domain/searchresult/?keyword=lywb.com&suffix=.com#/?keyword=lywb&suffix=com   Detail:'.$json;
+                    $mail->Body    =   $name.' 未注册 https://wanwang.aliyun.com/domain/searchresult/?keyword='.$name.'  == Detail:'.$json;
 
                     $mail->send();
                     echo "Ok \n";
@@ -83,6 +84,6 @@ class TestController extends BaseController
                 echo "Wait!!!\n";
             }
         }
-
+        print_r($json);
     }
 }
