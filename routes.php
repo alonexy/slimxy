@@ -10,6 +10,13 @@ $app->group('', function() {
     $this->get('/monitor_domain',\Controller\TestController::class.':MonitorDomain');
     $this->get('/test_view',\Controller\TestController::class.':TestView')->setName('profile');
 })->add( new \Middlewares\ExampleMiddleware());
+
+$app->group('/api', function() {
+    $this->get('/check',\Controller\DomainController::class.':Index');
+    $this->get('/add',\Controller\DomainController::class.':AddJob');
+})->add( new \Middlewares\ExampleMiddleware());
+
+$app->get('/resque_handle', \Jobs\Resque::class.':Handle');
 /**
  * new \Tuupola\Middleware\Cors([
 "origin" => ["*"],

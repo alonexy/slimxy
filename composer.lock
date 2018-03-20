@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0988768a3348242dfef1f69bb01ffd29",
+    "content-hash": "f1d93c7c87382ef97f17c24bae9a6162",
     "packages": [
         {
             "name": "bshaffer/oauth2-server-php",
@@ -476,6 +476,55 @@
                 "routing"
             ],
             "time": "2018-02-13T20:26:39+00:00"
+        },
+        {
+            "name": "pavlakis/slim-cli",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pavlakis/slim-cli.git",
+                "reference": "603933a54e391b3c70c573206cce543b75d8b1db"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/pavlakis/slim-cli/603933a54e391b3c70c573206cce543b75d8b1db.zip",
+                "reference": "603933a54e391b3c70c573206cce543b75d8b1db",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.5|^5.6|^7.0|^7.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.0",
+                "slim/slim": "^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "pavlakis\\cli\\tests\\": "tests/phpunit",
+                    "pavlakis\\cli\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Antonis Pavlakis",
+                    "email": "adoni@pavlakis.info",
+                    "homepage": "http://pavlakis.info"
+                }
+            ],
+            "description": "Making a mock GET request through the CLI and enabling the same application entry point on CLI scripts.",
+            "homepage": "http://github.com/pavlakis/slim-cli",
+            "keywords": [
+                "cli",
+                "framework",
+                "middleware",
+                "slim"
+            ],
+            "time": "2017-01-30T22:50:06+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -1129,6 +1178,56 @@
                 "templating"
             ],
             "time": "2018-03-03T16:23:01+00:00"
+        },
+        {
+            "name": "vlucas/phpdotenv",
+            "version": "v2.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vlucas/phpdotenv.git",
+                "reference": "3cc116adbe4b11be5ec557bf1d24dc5e3a21d18c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/vlucas/phpdotenv/3cc116adbe4b11be5ec557bf1d24dc5e3a21d18c.zip",
+                "reference": "3cc116adbe4b11be5ec557bf1d24dc5e3a21d18c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8 || ^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Dotenv\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause-Attribution"
+            ],
+            "authors": [
+                {
+                    "name": "Vance Lucas",
+                    "email": "vance@vancelucas.com",
+                    "homepage": "http://www.vancelucas.com"
+                }
+            ],
+            "description": "Loads environment variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.",
+            "keywords": [
+                "dotenv",
+                "env",
+                "environment"
+            ],
+            "time": "2016-09-01T10:05:43+00:00"
         },
         {
             "name": "zendframework/zend-diactoros",

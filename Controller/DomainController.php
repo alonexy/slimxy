@@ -11,30 +11,26 @@ namespace Controller;
 use PHPMailer\PHPMailer\PHPMailer;
 use Services\Test\TestFactory;
 
-class TestController extends BaseController
+class DomainController extends BaseController
 {
     public function Index($request, $response, $args)
     {
-        $ext = TestFactory::ExtensionInit();
-        $ext->beforeAction($request);
-        $selectStatement = $this->db->select()
-            ->from('users')
-            ->where('id', '=', 3);
-
-        $stmt = $selectStatement->execute();
-        $data = $stmt->fetch();
-        //print_r($data);
-        $ext->behindAction($data);
-        if($data){
-            return $response->withJson(['list'=>$data,'msg'=>'suc']);
-        }
-        return $response->withJson(['list'=>$data,'msg'=>'fail']);
-    }
-    public function TestView($request, $response){
-        $name = $request->getQueryParam('name','hi');
-        return $this->view->render($response, 'test.php', [
+        $name = '11111';
+        return $this->view->render($response, '/domian/index.php', [
             'name' => $name
         ]);
+    }
+    public function AddJob($request, $response, $args){
+        \Resque::setBackend("127.0.0.1:6379",0);
+        \Resque::auth("alonexy");
+
+        $args = array(
+            'name' => 'Chris'
+        );
+        print_r($args);
+        $jobID =  \Resque::enqueue('default',\Jobs\DomainMonitor_Job::class, $args,true);
+
+        print_r($jobID);
     }
     public function curlGet($url) {
         $curl = curl_init();

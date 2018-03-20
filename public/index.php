@@ -1,10 +1,12 @@
 <?php
 require __DIR__.'/../vendor/autoload.php';
+$dotenv = new Dotenv\Dotenv(__DIR__.'/../');
+$dotenv->load();
 //phpinfo();
 $container = new \Slim\Container;
 $container['logger'] = function($c) {
     $logger = new \Monolog\Logger('my_logger');
-    $file_handler = new \Monolog\Handler\StreamHandler('../logs/app.log');
+    $file_handler = new \Monolog\Handler\StreamHandler(__DIR__.'/../logs/app.log');
     $logger->pushHandler($file_handler);
     return $logger;
 };
@@ -17,7 +19,7 @@ $container['db'] = function ($c) {
 };
 //======视图=====
 $container['view'] = function ($c) {
-    $view = new \Slim\Views\Twig('../Templates', [
+    $view = new \Slim\Views\Twig(__DIR__.'/../Templates', [
         'cache' => false
     ]);
     // Instantiate and add Slim specific extension
@@ -45,5 +47,6 @@ $settings->replace($config);
  * --------------------------------
  */
 $app = new \Slim\App($container);
-require '../routes.php';
+$app->add(new \pavlakis\cli\CliRequest());
+require __DIR__.'/../routes.php';
 $app->run();
