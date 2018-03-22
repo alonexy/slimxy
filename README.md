@@ -1,8 +1,9 @@
 ## slimxy
 ```
-slim 学习完善
+基于Slim框架
+利用composer不断扩展
+打造适合自己的php开发框架
 
-composer update
 
 实现aop结构
 实现路由
