@@ -26,10 +26,12 @@ class DomainController extends BaseController
             $args = array(
                 'name' => 'Chris'
             );
+
             $jobID =  \Resque::enqueue('default',\Jobs\DomainMonitor_Job::class, $args,true);
-            if(!empty($jobID)){
+            if(empty($jobID)){
                 throw new \Exception('Job 投递失败',1002);
             }
+            $this->container->logger->info('aa');
             return $response->withJson(['job_id'=>$jobID,'msg'=>'suc']);
     }
     public function curlGet($url) {

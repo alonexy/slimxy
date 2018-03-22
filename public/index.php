@@ -27,6 +27,7 @@ $container['view'] = function ($c) {
     $view->addExtension(new \Slim\Views\TwigExtension($c['router'], $basePath));
     return $view;
 };
+//==报错处理==
 $container['errorHandler'] = function ($c) {
     return function ($request, $response, $exception) use ($c) {
         $errMsg = $exception->getMessage();
