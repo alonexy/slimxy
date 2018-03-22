@@ -21,16 +21,16 @@ class DomainController extends BaseController
         ]);
     }
     public function AddJob($request, $response, $args){
-        \Resque::setBackend("127.0.0.1:6379",0);
-        \Resque::auth("alonexy");
-
-        $args = array(
-            'name' => 'Chris'
-        );
-        print_r($args);
-        $jobID =  \Resque::enqueue('default',\Jobs\DomainMonitor_Job::class, $args,true);
-
-        print_r($jobID);
+            \Resque::setBackend("127.0.0.1:6379",0);
+            \Resque::auth("alonexy");
+            $args = array(
+                'name' => 'Chris'
+            );
+            $jobID =  \Resque::enqueue('default',\Jobs\DomainMonitor_Job::class, $args,true);
+            if(!empty($jobID)){
+                throw new \Exception('Job 投递失败',1002);
+            }
+            return $response->withJson(['job_id'=>$jobID,'msg'=>'suc']);
     }
     public function curlGet($url) {
         $curl = curl_init();

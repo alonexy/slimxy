@@ -29,9 +29,17 @@ $container['view'] = function ($c) {
 };
 $container['errorHandler'] = function ($c) {
     return function ($request, $response, $exception) use ($c) {
-        return $c['response']->withStatus(500)
-            ->withHeader('Content-Type', 'text/html')
-            ->write('Something went wrong!');
+        $errMsg = $exception->getMessage();
+        $errCode = $exception->getCode();
+        $errFile = $exception->getFile();
+        $errLine = $exception->getLine();
+        $resp = array();
+        $resp['msg'] = $errMsg;
+        $resp['code'] = $errCode;
+        $resp['data'] = (object)[];
+        $resp['err_file'] = $errFile;
+        $resp['err_line'] = $errLine;
+        return $c['response']->withJson($resp);
     };
 };
 //配置更新

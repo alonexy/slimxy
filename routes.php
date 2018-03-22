@@ -5,6 +5,7 @@
  * Date: 18/2/26
  * Time: 16:22
  */
+$app->get('/',\Controller\IndexController::class.':Index');
 $app->group('', function() {
     $this->get('/test',\Controller\TestController::class.':Index');
     $this->get('/monitor_domain',\Controller\TestController::class.':MonitorDomain');
@@ -14,16 +15,13 @@ $app->group('', function() {
 $app->group('/api', function() {
     $this->get('/check',\Controller\DomainController::class.':Index');
     $this->get('/add',\Controller\DomainController::class.':AddJob');
-})->add( new \Middlewares\ExampleMiddleware());
+})->add(new \Tuupola\Middleware\Cors([
+    "origin" => ["*"],
+    "methods" => ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    "headers.allow" => [],
+    "headers.expose" => [],
+    "credentials" => false,
+    "cache" => 0,
+]));
 
 $app->get('/resque_handle', \Jobs\Resque::class.':Handle');
-/**
- * new \Tuupola\Middleware\Cors([
-"origin" => ["*"],
-"methods" => ["GET", "POST", "PUT", "PATCH", "DELETE"],
-"headers.allow" => [],
-"headers.expose" => [],
-"credentials" => false,
-"cache" => 0,
-])
- */

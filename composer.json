@@ -10,7 +10,8 @@
         "chadicus/slim-oauth2-middleware": "^3.2",
         "phpmailer/phpmailer": "^6.0",
         "pavlakis/slim-cli": "^1.0",
-        "vlucas/phpdotenv": "^2.4"
+        "vlucas/phpdotenv": "^2.4",
+        "guzzlehttp/guzzle": "^6.3"
     },
     "autoload": {
         "psr-4": {
