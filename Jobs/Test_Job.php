@@ -6,7 +6,7 @@ namespace Jobs;
  * Date: 18/3/19
  * Time: 15:56
  */
-class DomainMonitor_Job
+class Test_Job
 {
     public function setUp()
     {
@@ -18,6 +18,7 @@ class DomainMonitor_Job
     {
         // .. Run job
         echo "==perform==\n";
+        die(1111);
     }
 
     public function tearDown()

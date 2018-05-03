@@ -13,27 +13,6 @@ use Services\Test\TestFactory;
 
 class DomainController extends BaseController
 {
-    public function Index($request, $response, $args)
-    {
-        $name = '11111';
-        return $this->view->render($response, '/domian/index.php', [
-            'name' => $name
-        ]);
-    }
-    public function AddJob($request, $response, $args){
-            \Resque::setBackend("127.0.0.1:6379",0);
-            \Resque::auth("alonexy");
-            $args = array(
-                'name' => 'Chris'
-            );
-
-            $jobID =  \Resque::enqueue('default',\Jobs\DomainMonitor_Job::class, $args,true);
-            if(empty($jobID)){
-                throw new \Exception('Job 投递失败',1002);
-            }
-            $this->container->logger->info('aa');
-            return $response->withJson(['job_id'=>$jobID,'msg'=>'suc']);
-    }
     public function curlGet($url) {
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);

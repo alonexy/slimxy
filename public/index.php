@@ -4,17 +4,24 @@ $dotenv = new Dotenv\Dotenv(__DIR__.'/../');
 $dotenv->load();
 //phpinfo();
 $container = new \Slim\Container;
+// ======Log配置=====
 $container['logger'] = function($c) {
-    $logger = new \Monolog\Logger('my_logger');
-    $file_handler = new \Monolog\Handler\StreamHandler(__DIR__.'/../logs/app.log');
+    $logName = date('Y-m-d');
+    $logger = new \Monolog\Logger($logName);
+    $file_handler = new \Monolog\Handler\StreamHandler(__DIR__.'/../logs/'.$logName.'.log');
     $logger->pushHandler($file_handler);
     return $logger;
+};
+// ======Configs 配置=====
+$container['configs'] = function($c) {
+    $Configs = new \Configs\Config($c['settings']);
+    return $Configs;
 };
 //  ======数据库配置=====
 $container['db'] = function ($c) {
     $db = $c['settings']['db'];
-    $dsn = 'mysql:host='.$db['host'].';dbname='.$db['dbname'].';charset=utf8';
-    $pdo = new \Slim\PDO\Database($dsn, $db['user'], $db['pass']);
+    $dsn = 'mysql:host='.$db['default']['host'].';dbname='.$db['default']['dbname'].';charset=utf8';
+    $pdo = new \Slim\PDO\Database($dsn, $db['default']['user'], $db['default']['pass']);
     return $pdo;
 };
 //======视图=====
@@ -47,7 +54,7 @@ $container['errorHandler'] = function ($c) {
 $settings = $container->get('settings');
 $env = getenv('APP_ENV');
 if(!in_array($env,['local','production','test'])){
-    $error = 'Set Nginx fastcgi_param  APP_ENV  in (local,production,test)';
+    $error = 'Set APP_ENV in (local,production,test)';
     throw new Exception($error);
 }
 $config = require __DIR__.'/../Configs/'.$env.'.php';

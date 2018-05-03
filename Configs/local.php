@@ -4,9 +4,25 @@ return [
     'determineRouteBeforeAppMiddleware' => true,
     'debug' => true,
     'db'=>[
-        'host'=>'127.0.0.1',
-        'dbname'=>'push',
-        'user'=>'root',
-        'pass'=>'',
+        'default'=>[
+            'host'=>'127.0.0.1',
+            'dbname'=>'push',
+            'user'=>'root',
+            'pass'=>'',
+        ]
+    ],
+    'redis'=>[
+        'default'=>[
+            'host'=>'127.0.0.1',
+            'port'=>'6379',
+            'auth'=>'alonexy',
+            'db_set'=>0,
+        ],
+        'job'=>[
+            'host'=>'127.0.0.1',
+            'port'=>'6379',
+            'auth'=>'alonexy',
+            'db_set'=>2,
+        ]
     ]
 ];

@@ -1,22 +1,18 @@
 <?php
 namespace Jobs;
 use Dotenv\Dotenv;
-
 if (PHP_SAPI !== 'cli') {
-    $error = 'Job is not CLI';
+    $error = 'Job execute is Must CLI';
     throw new \Exception($error);
 }
 class Resque{
 
-    public function __construct(){
-
-    }
     public function Handle(){
         $QUEUE = getenv('QUEUE');
         if(empty($QUEUE)) {
             die("Set QUEUE env var containing the list of queues to work.\n");
         }
-        \Resque::setBackend("127.0.0.1:6379",0);
+        \Resque::setBackend("127.0.0.1:6379",2);
         \Resque::auth("alonexy");
         $logLevel = 0;
         $LOGGING = getenv('LOGGING');
@@ -59,6 +55,7 @@ class Resque{
                 // Child, start the worker
                 else if(!$pid) {
                     $queues = explode(',', $QUEUE);
+                    print_r($queues);
                     $worker = new \Resque_Worker($queues);
                     $worker->logLevel = $logLevel;
                     fwrite(STDOUT, '*** Starting worker '.$worker."\n");
@@ -70,6 +67,7 @@ class Resque{
 // Start a single worker
         else {
             $queues = explode(',', $QUEUE);
+            print_r($queues);
             $worker = new \Resque_Worker($queues);
             $worker->logLevel = $logLevel;
 

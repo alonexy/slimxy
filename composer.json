@@ -17,8 +17,10 @@
         "psr-4": {
             "Services\\": "Services/",
             "Controller\\":"Controller",
+            "Configs\\":"Configs",
             "Model\\":"Model",
-            "Jobs\\":"Jobs"
+            "Jobs\\":"Jobs",
+            "Helpers\\":"Helpers"
         },
         "classmap" : [
             "Middlewares/"

@@ -13,6 +13,12 @@ use Services\Test\TestFactory;
 
 class IndexController extends BaseController
 {
+    /**
+     * @param $request
+     * @param $response
+     * @param $args
+     * @return mixed
+     */
     public function Index($request, $response, $args)
     {
         $name = $request->getQueryParam('name','Slimxy');
