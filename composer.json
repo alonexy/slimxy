@@ -15,6 +15,7 @@
     },
     "autoload": {
         "psr-4": {
+            "Core\\": "Core/",
             "Services\\": "Services/",
             "Controller\\":"Controller",
             "Configs\\":"Configs",
@@ -25,5 +26,16 @@
         "classmap" : [
             "Middlewares/"
         ]
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "composer dump-autoload -o"
+        ],
+        "post-update-cmd":[
+            "composer dump-autoload -o"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist"
     }
 }

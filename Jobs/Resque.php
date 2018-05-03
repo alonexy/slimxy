@@ -4,7 +4,6 @@ use Interop\Container\ContainerInterface;
 
 require __DIR__.'/../vendor/autoload.php';
 
-//phpinfo();
 $container = new \Slim\Container;
 $container['configs'] = function($c) {
     $Configs = new \Configs\Config($c['settings']);
@@ -16,7 +15,6 @@ if (PHP_SAPI !== 'cli') {
 }
 class Resque{
     public $container;
-    //ContainerInterface
     public function __construct( ContainerInterface $container)
     {
         $this->container = $container;
