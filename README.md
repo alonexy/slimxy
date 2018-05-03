@@ -1,6 +1,6 @@
 ## slimxy
 ```
-基于Slim框架
+基于Slim框架 【https://www.slimframework.com/docs/】
 利用composer不断扩展
 打造适合自己的php开发框架
 
