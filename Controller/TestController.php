@@ -31,9 +31,9 @@ class TestController extends BaseController
         return $response->withJson(['list'=>$data,'msg'=>'fail']);
     }
     public function AddJob($request, $response, $args){
-        $redisConfs = $this->container->get('configs')->get('redis','job');
+        $redisConfs = $this->configs->get('redis','job');
         \Resque::setBackend("{$redisConfs['host']}:{$redisConfs['port']}",$redisConfs['db_set']);
-        \Resque::auth("{$redisConfs['host']}");
+        \Resque::auth("{$redisConfs['auth']}");
         $args = array(
             'name' => 'Chris'
         );
@@ -44,7 +44,7 @@ class TestController extends BaseController
         }
         $this->container->logger->info('jobID==>',[$jobID]);
 
-        return $response->withJson(['job_id'=>$jobID,'msg'=>'suc']);
+        return $response->withJson(['job_id'=>$jobID,'msg'=>'suc','redisConfs'=>$redisConfs]);
     }
     public function TestView($request, $response){
         $name = $request->getQueryParam('name','hi');

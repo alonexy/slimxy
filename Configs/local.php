@@ -22,7 +22,7 @@ return [
             'host'=>'127.0.0.1',
             'port'=>'6379',
             'auth'=>'alonexy',
-            'db_set'=>2,
+            'db_set'=>0,
         ]
     ]
 ];

@@ -1,19 +1,35 @@
 <?php
 namespace Jobs;
-use Dotenv\Dotenv;
+use Interop\Container\ContainerInterface;
+
+require __DIR__.'/../vendor/autoload.php';
+
+//phpinfo();
+$container = new \Slim\Container;
+$container['configs'] = function($c) {
+    $Configs = new \Configs\Config($c['settings']);
+    return $Configs;
+};
 if (PHP_SAPI !== 'cli') {
     $error = 'Job execute is Must CLI';
     throw new \Exception($error);
 }
 class Resque{
-
+    public $container;
+    //ContainerInterface
+    public function __construct( ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
     public function Handle(){
+
         $QUEUE = getenv('QUEUE');
         if(empty($QUEUE)) {
             die("Set QUEUE env var containing the list of queues to work.\n");
         }
-        \Resque::setBackend("127.0.0.1:6379",2);
-        \Resque::auth("alonexy");
+        $redisConfs = $this->container->get('configs')->get('redis','job');
+        \Resque::setBackend("{$redisConfs['host']}:{$redisConfs['port']}",$redisConfs['db_set']);
+        \Resque::auth("{$redisConfs['auth']}");
         $logLevel = 0;
         $LOGGING = getenv('LOGGING');
         $VERBOSE = getenv('VERBOSE');
@@ -55,7 +71,6 @@ class Resque{
                 // Child, start the worker
                 else if(!$pid) {
                     $queues = explode(',', $QUEUE);
-                    print_r($queues);
                     $worker = new \Resque_Worker($queues);
                     $worker->logLevel = $logLevel;
                     fwrite(STDOUT, '*** Starting worker '.$worker."\n");
@@ -67,7 +82,6 @@ class Resque{
 // Start a single worker
         else {
             $queues = explode(',', $QUEUE);
-            print_r($queues);
             $worker = new \Resque_Worker($queues);
             $worker->logLevel = $logLevel;
 
@@ -83,5 +97,5 @@ class Resque{
     }
 
 }
-new Resque();
+new Resque($container);
 ?>
