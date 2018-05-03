@@ -4,11 +4,6 @@ use Interop\Container\ContainerInterface;
 
 require __DIR__.'/../vendor/autoload.php';
 
-$container = new \Slim\Container;
-$container['configs'] = function($c) {
-    $Configs = new \Configs\Config($c['settings']);
-    return $Configs;
-};
 if (PHP_SAPI !== 'cli') {
     $error = 'Job execute is Must CLI';
     throw new \Exception($error);
@@ -95,5 +90,6 @@ class Resque{
     }
 
 }
-new Resque($container);
+$container = new \Core\Containers();
+new Resque($container->GetContainers());
 ?>
