@@ -7,11 +7,12 @@ namespace Core;
  */
 Class Containers
 {
-    private $container;
+    public $container;
 
     public function __construct()
     {
         $this->container = new \Slim\Container;
+        $this->SetContainersSettings();
     }
 
     /**
@@ -73,7 +74,7 @@ Class Containers
      * 容器配置文件更新
      * @throws \Exception
      */
-    public function SetContainersSettings()
+    private function SetContainersSettings()
     {
         //配置更新
         $settings = $this->container->get('settings');

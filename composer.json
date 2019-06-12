@@ -11,7 +11,8 @@
         "phpmailer/phpmailer": "^6.0",
         "pavlakis/slim-cli": "^1.0",
         "vlucas/phpdotenv": "^2.4",
-        "guzzlehttp/guzzle": "^6.3"
+        "guzzlehttp/guzzle": "^6.3",
+        "spiral/roadrunner": "^1.4"
     },
     "autoload": {
         "psr-4": {

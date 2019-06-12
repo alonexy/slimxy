@@ -5,7 +5,6 @@ $dotenv->load();
 //phpinfo();
 
 $container = new \Core\Containers();
-$container->SetContainersSettings();
 $app = new \Slim\App($container->GetContainers());
 #CLi Add
 $app->add(new \pavlakis\cli\CliRequest());
