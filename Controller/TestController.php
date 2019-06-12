@@ -32,8 +32,8 @@ class TestController extends BaseController
     }
     public function AddJob($request, $response, $args){
         $redisConfs = $this->configs->get('redis','job');
-        \Resque::setBackend("{$redisConfs['host']}:{$redisConfs['port']}",$redisConfs['db_set']);
-        \Resque::auth("{$redisConfs['auth']}");
+        $dsn = "redis://auth:{$redisConfs['auth']}@{$redisConfs['host']}:{$redisConfs['port']}";
+        \Resque::setBackend($dsn,$redisConfs['db_set']);
         $args = array(
             'name' => 'Chris'
         );
