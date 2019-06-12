@@ -2,42 +2,50 @@
 namespace Jobs;
 use Interop\Container\ContainerInterface;
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 if (PHP_SAPI !== 'cli') {
     $error = 'Job execute is Must CLI';
     throw new \Exception($error);
 }
-class Resque{
+
+class Resque
+{
     public $container;
-    public function __construct( ContainerInterface $container)
+
+    public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
     }
-    public function Handle(){
+
+    public function Handle()
+    {
 
         $QUEUE = getenv('QUEUE');
-        if(empty($QUEUE)) {
+        if (empty($QUEUE)) {
             die("Set QUEUE env var containing the list of queues to work.\n");
         }
-        $redisConfs = $this->container->get('configs')->get('redis','job');
-        \Resque::setBackend("{$redisConfs['host']}:{$redisConfs['port']}",$redisConfs['db_set']);
-        \Resque::auth("{$redisConfs['auth']}");
-        $logLevel = 0;
-        $LOGGING = getenv('LOGGING');
-        $VERBOSE = getenv('VERBOSE');
+        $redisConfs = $this->container->get('configs')->get('redis', 'job');
+
+        $dsn = "redis://auth:{$redisConfs['auth']}@{$redisConfs['host']}:{$redisConfs['port']}";
+//            $redisServer = new \Resque_Redis($dsn,$redisConfs['db_set']);
+        \Resque::setBackend($dsn, $redisConfs['db_set']);
+
+        $logLevel = false;
+        $LOGGING  = getenv('LOGGING');
+        $VERBOSE  = getenv('VERBOSE');
         $VVERBOSE = getenv('VVERBOSE');
-        if(!empty($LOGGING) || !empty($VERBOSE)) {
-            $logLevel = \Resque_Worker::LOG_NORMAL;
+        if (!empty($LOGGING) || !empty($VERBOSE)) {
+            $logLevel = true;
         }
-        else if(!empty($VVERBOSE)) {
-            $logLevel = \Resque_Worker::LOG_VERBOSE;
+        else if (!empty($VVERBOSE)) {
+            $logLevel = true;
         }
 
         $APP_INCLUDE = getenv('APP_INCLUDE');
-        if($APP_INCLUDE) {
-            if(!file_exists($APP_INCLUDE)) {
-                die('APP_INCLUDE ('.$APP_INCLUDE.") does not exist.\n");
+        if ($APP_INCLUDE) {
+            if (!file_exists($APP_INCLUDE)) {
+                die('APP_INCLUDE (' . $APP_INCLUDE . ") does not exist.\n");
             }
 
             require_once $APP_INCLUDE;
@@ -45,28 +53,28 @@ class Resque{
 
         $interval = 5;
         $INTERVAL = getenv('INTERVAL');
-        if(!empty($INTERVAL)) {
+        if (!empty($INTERVAL)) {
             $interval = $INTERVAL;
         }
 
         $count = 1;
         $COUNT = getenv('COUNT');
-        if(!empty($COUNT) && $COUNT > 1) {
+        if (!empty($COUNT) && $COUNT > 1) {
             $count = $COUNT;
         }
 
-        if($count > 1) {
-            for($i = 0; $i < $count; ++$i) {
+        if ($count > 1) {
+            for ($i = 0; $i < $count; ++$i) {
                 $pid = pcntl_fork();
-                if($pid == -1) {
-                    die("Could not fork worker ".$i."\n");
+                if ($pid == -1) {
+                    die("Could not fork worker " . $i . "\n");
                 }
                 // Child, start the worker
-                else if(!$pid) {
-                    $queues = explode(',', $QUEUE);
-                    $worker = new \Resque_Worker($queues);
+                else if (!$pid) {
+                    $queues           = explode(',', $QUEUE);
+                    $worker           = new \Resque_Worker($queues);
                     $worker->logLevel = $logLevel;
-                    fwrite(STDOUT, '*** Starting worker '.$worker."\n");
+                    fwrite(STDOUT, '*** Starting worker ' . $worker . "\n");
                     $worker->work($interval);
                     break;
                 }
@@ -74,8 +82,8 @@ class Resque{
         }
 // Start a single worker
         else {
-            $queues = explode(',', $QUEUE);
-            $worker = new \Resque_Worker($queues);
+            $queues           = explode(',', $QUEUE);
+            $worker           = new \Resque_Worker($queues);
             $worker->logLevel = $logLevel;
 
             $PIDFILE = getenv('PIDFILE');
@@ -84,12 +92,17 @@ class Resque{
                 die('Could not write PID information to ' . $PIDFILE);
             }
 
-            fwrite(STDOUT, '*** Starting worker '.$worker."\n");
+            fwrite(STDOUT, '*** Starting worker ' . $worker . "\n");
             $worker->work($interval);
         }
     }
 
+    function cleanup_children($signal)
+    {
+        $GLOBALS['send_signal'] = $signal;
+    }
 }
+
 $container = new \Core\Containers();
 new Resque($container->GetContainers());
 ?>

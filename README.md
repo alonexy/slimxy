@@ -12,4 +12,7 @@
 实现cli
 实现任务队列
 实现env
+
+增加 Swoole 支持http Server
+php bin/Slimxy
 ```
