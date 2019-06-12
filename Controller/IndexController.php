@@ -22,6 +22,7 @@ class IndexController extends BaseController
     public function Index($request, $response, $args)
     {
         $name = $request->getQueryParam('name','Slimxy');
+        //testsss
         return $this->view->render($response, 'weclome.php', [
             'name' => $name
         ]);
