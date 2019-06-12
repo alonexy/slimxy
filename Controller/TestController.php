@@ -10,10 +10,11 @@ namespace Controller;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use Services\Test\TestFactory;
+use Slim\Http\Request;
 
 class TestController extends BaseController
 {
-    public function Index($request, $response, $args)
+    public function Index(Request $request, $response, $args)
     {
         $ext = TestFactory::ExtensionInit();
         $ext->beforeAction($request);
