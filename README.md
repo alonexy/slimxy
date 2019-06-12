@@ -13,10 +13,19 @@
 实现任务队列
 实现env
 
-增加 Swoole 支持http Server
-php bin/Slimxy
+
 ```
-### resque
+### 命令行模式
+```
+php bin/Console list
+
+```
+### Swoole HttpServer
+```
+php bin/Console http:serve -h
+```
+
+### Queue Job resque
 
 ```
 QUEUE – 这个是必要的，会决定 worker 要执行什么任务，重要的在前，例如 QUEUE=notify,mail,log 。也可以设定為 QUEUE=* 表示执行所有任务。
