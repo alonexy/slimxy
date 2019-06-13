@@ -10,10 +10,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 
 /**
- * Created by PhpStorm.
- * User: alonexy
- * Date: 19/6/12
- * Time: 16:55
+ * SlimXy HttpServer
+ * Class HttpServer
+ * @package Command
  */
 class HttpServer extends Command
 {
@@ -28,7 +27,7 @@ class HttpServer extends Command
         'stop',
         'status'
     ];
-    # PidFile
+    # PidFileDir
     protected $PidFile = __DIR__ . '/../bin/http_server.pid';
 
     public function __construct()
@@ -36,6 +35,9 @@ class HttpServer extends Command
         parent::__construct();
     }
 
+    /**
+     * 配置
+     */
     protected function configure()
     {
         $this->setDescription('Provide some commands to manage the Slimxy HTTP Server')

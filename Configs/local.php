@@ -9,6 +9,12 @@ return [
             'dbname'=>'push',
             'user'=>'root',
             'pass'=>'',
+        ],
+        'test1'=>[
+            'host'=>'127.0.0.1',
+            'dbname'=>'push',
+            'user'=>'root',
+            'pass'=>'',
         ]
     ],
     'redis'=>[

@@ -1,10 +1,5 @@
 <?php declare(strict_types = 1);
-/**
- * Created by PhpStorm.
- * User: alonexy
- * Date: 19/6/12
- * Time: 22:51
- */
+
 namespace Helpers;
 
 use function file_exists;

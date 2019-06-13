@@ -1,11 +1,6 @@
 <?php
 namespace Helpers;
-/**
- * Created by PhpStorm.
- * User: alonexy
- * Date: 18/4/28
- * Time: 17:54
- */
+
 class Functions
 {
     /**

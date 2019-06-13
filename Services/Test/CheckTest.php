@@ -13,7 +13,7 @@ use Services\ServicesInterface;
 class CheckTest implements ServicesInterface
 {
     public function beforeAction($arr){
-//        echo 'dahdahdadh<br>';
+//        echo 'sdsdsdsdsdsd<br>';
     }
 
     public function behindAction($arr){

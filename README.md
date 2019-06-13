@@ -23,6 +23,9 @@ php bin/Console list
 ### Swoole HttpServer
 ```
 php bin/Console http:serve -h
+
+bin/dev-monit.sh  # 开发环境 自动重启
+
 ```
 
 ### Queue Job resque
