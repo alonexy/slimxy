@@ -20,7 +20,6 @@ class Resque
 
     public function Handle()
     {
-
         $QUEUE = getenv('QUEUE');
         if (empty($QUEUE)) {
             die("Set QUEUE env var containing the list of queues to work.\n");

@@ -22,6 +22,7 @@ php bin/Console list
 ```
 ### Swoole HttpServer
 ```
+#swoole version 4.3.4
 php bin/Console http:serve -h
 
 bin/dev-monit.sh  # 开发环境 自动重启
