@@ -25,7 +25,8 @@ class HttpServer extends Command
     protected $actions = [
         'start',
         'reload',
-        'stop'
+        'stop',
+        'status'
     ];
     # PidFile
     protected $PidFile = __DIR__ . '/../bin/http_server.pid';
@@ -68,6 +69,9 @@ class HttpServer extends Command
                 break;
             case "stop":
                 $this->Stop($input, $output);
+                break;
+            case "status":
+                $this->Status($input, $output);
                 break;
             default:
                 return $output->writeln("<error>action is Err must in ['start','reload', 'stop'] </error>");
@@ -199,5 +203,24 @@ class HttpServer extends Command
         }
         $output->writeln("<error>Http Server Not Stop. [Unkonw Err] </error>");
         return false;
+    }
+
+    /**
+     * 获取状态
+     * @param $input
+     * @param $output
+     * @return bool
+     */
+    public function Status($input, $output)
+    {
+        $pid = ServerHelper::getPid($this->PidFile);
+        if ($pid < 1) {
+            $output->writeln("<error>Http Server is Not Running.</error>");
+            return false;
+        }
+        if (!ServerHelper::isRunning($pid)) {
+            return $output->writeln("<error>Http Server is Not Running. </error>");
+        }
+        return $output->writeln("<success>Http Server is Running. </success>");
     }
 }
