@@ -99,10 +99,10 @@ class HttpServer extends Command
             array(
                 'daemonize' => $daemonize,    //守护进程化 true/false
                 'pid_file' => $this->PidFile,
-                'reactor_num' => 2,    //reactor thread num
-                'worker_num' => 4,    //Swoole采用固定Worker进程的模式
-                'backlog' => 128,    //此参数将决定最多同时有多少个等待accept的连接。
-                'max_request' => 2000,
+                'reactor_num' => 1,    //reactor thread num
+                'worker_num' => 8,    //Swoole采用固定Worker进程的模式
+                'backlog' => 2048,    //此参数将决定最多同时有多少个等待accept的连接。
+                'max_request' => 3000,
                 'max_coroutine' => 30000,
                 'enable_coroutine' => true,
                 'dispatch_mode' => 1, // 1平均分配，2按FD取模固定分配，3抢占式分配，默认为取模(dispatch=2)

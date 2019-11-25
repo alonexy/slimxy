@@ -8,7 +8,7 @@
 
 namespace Controller;
 
-use PHPMailer\PHPMailer\PHPMailer;
+use Helpers\RedisHelper;
 use Services\Test\TestFactory;
 use Slim\Http\Request;
 

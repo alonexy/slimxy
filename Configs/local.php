@@ -30,5 +30,14 @@ return [
             'auth'=>'alonexy',
             'db_set'=>0,
         ]
+    ],
+    'mongodb'=>[
+        'default'=>[
+            'uri'=>'mongodb://127.0.0.1:27017',
+            'appname'=>'test',
+            'authSource'=>'admin',
+            'username'=>'admin',
+            'password'=>'123456'
+        ]
     ]
 ];

@@ -9,6 +9,7 @@ $app->get('/',\Controller\IndexController::class.':Index');
 
 $app->group('/api', function() {
     $this->get('/test',\Controller\TestController::class.':Index');
+    $this->get('/kline_test',\Controller\TestController::class.':kline_test');
     $this->get('/addJob',\Controller\TestController::class.':AddJob');
 })->add(new \Tuupola\Middleware\Cors([
     "origin" => ["*"],
