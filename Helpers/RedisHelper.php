@@ -1,23 +1,42 @@
 <?php
+
+declare(strict_types=1);
+/**
+ * This file is part of Slimxy.
+ *
+ * @link     http://www.alonexy.com
+ * @document https://www.slimframework.com/
+ */
+
 namespace Helpers;
 
 use Predis\Client;
 
 class RedisHelper
 {
-    static $instance;
+    public static $instance;
+
+    public static $rc;
+
     private $ck;
-    static $rc;
 
     private function __construct($conf)
     {
         $this->ck = $conf;
     }
 
+    private function __clone()
+    {
+    }
+
+    private function __wakeup()
+    {
+    }
+
     public function get()
     {
         $redisConfs = $this->ck;
-        $options    = [
+        $options = [
             'parameters' => [
                 'password' => $redisConfs['auth'],
                 'database' => $redisConfs['db_set'],
@@ -26,17 +45,11 @@ class RedisHelper
         return new Client(["tcp://{$redisConfs['host']}:{$redisConfs['port']}"], $options);
     }
 
-    static public function connections($conf)
+    public static function connections($conf)
     {
-        if (!self::$instance instanceof self) {
+        if (! self::$instance instanceof self) {
             self::$instance = new self($conf);
         }
         return self::$instance;
     }
-
-    private function __clone() { }
-
-    private function __wakeup() { }
-
-
 }

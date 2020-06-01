@@ -1,18 +1,21 @@
 <?php
+
+declare(strict_types=1);
 /**
- * Created by PhpStorm.
- * User: alonexy
- * Date: 18/5/3
- * Time: 15:15
+ * This file is part of Slimxy.
+ *
+ * @link     http://www.alonexy.com
+ * @document https://www.slimframework.com/
  */
 
 namespace Jobs;
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 class Jobs
 {
     public $container;
+
     public function __construct()
     {
         $container = new \Core\Containers();

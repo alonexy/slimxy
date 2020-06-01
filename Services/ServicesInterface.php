@@ -1,33 +1,43 @@
 <?php
+
+declare(strict_types=1);
 /**
- * Created by PhpStorm.
- * User: alonexy
- * Date: 18/2/28
- * Time: 14:08
+ * This file is part of Slimxy.
+ *
+ * @link     http://www.alonexy.com
+ * @document https://www.slimframework.com/
  */
+
 namespace Services;
 
-interface ServicesInterface {
+interface ServicesInterface
+{
     public function beforeAction($arr);
 
     public function behindAction($arr);
-};
+}
 
-class ServicesInterfaceExtension implements ServicesInterface {
+class ServicesInterfaceExtension implements ServicesInterface
+{
     // 扩展数组
-    private $_extensionArray = array();
+    private $_extensionArray = [];
 
-    public function addExtension(ServicesInterface $extension) {
-        $this->_extensionArray []= $extension;
+    public function addExtension(ServicesInterface $extension)
+    {
+        $this->_extensionArray[] = $extension;
     }
-    public function beforeAction($arr) {
+
+    public function beforeAction($arr)
+    {
         foreach ($this->_extensionArray as $extension) {
             $extension->beforeAction($arr);
         }
     }
-    public function behindAction($arr) {
+
+    public function behindAction($arr)
+    {
         foreach ($this->_extensionArray as $extension) {
             $extension->behindAction($arr);
         }
     }
-};
+}

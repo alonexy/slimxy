@@ -1,15 +1,14 @@
 <?php
+
+declare(strict_types=1);
 /**
- * Created by PhpStorm.
- * User: alonexy
- * Date: 18/2/24
- * Time: 17:42
+ * This file is part of Slimxy.
+ *
+ * @link     http://www.alonexy.com
+ * @document https://www.slimframework.com/
  */
 
 namespace Controller;
-
-use PHPMailer\PHPMailer\PHPMailer;
-use Services\Test\TestFactory;
 
 class IndexController extends BaseController
 {
@@ -21,10 +20,10 @@ class IndexController extends BaseController
      */
     public function Index($request, $response, $args)
     {
-        $name = $request->getQueryParam('name','Slimxy');
+        $name = $request->getQueryParam('name', 'Slimxy');
         //testsss
         return $this->view->render($response, 'weclome.php', [
-            'name' => $name
+            'name' => $name,
         ]);
     }
 }

@@ -1,47 +1,58 @@
 <?php
 
+declare(strict_types=1);
+/**
+ * This file is part of Slimxy.
+ *
+ * @link     http://www.alonexy.com
+ * @document https://www.slimframework.com/
+ */
+
 namespace Helpers;
 
 class MongoHelper
 {
+    public static $instance;
 
-    static $instance;
+    public static $rc;
+
     private $ck;
-    static $rc;
 
     private function __construct($conf)
     {
         $this->ck = $conf;
     }
 
-    public function Get()
+    private function __clone()
     {
-        $Confs  = $this->ck;
-        $opts   = [
-            "appname" => $Confs['appname'],
-            "authMechanism" => "SCRAM-SHA-1",
-            "authSource" => $Confs['authSource'],
-            "username" => $Confs['username'],
-            "password" => $Confs['password'],
-            "retryWrites" => true,
-        ];
-        $client = new \MongoDB\Client(
-            $Confs["uri"], $opts
-        );
-        return $client;
     }
 
-    static public function connections($conf)
+    private function __wakeup()
     {
-        if (!self::$instance instanceof self) {
+    }
+
+    public function Get()
+    {
+        $Confs = $this->ck;
+        $opts = [
+            'appname' => $Confs['appname'],
+            'authMechanism' => 'SCRAM-SHA-1',
+            'authSource' => $Confs['authSource'],
+            'username' => $Confs['username'],
+            'password' => $Confs['password'],
+            'retryWrites' => true,
+        ];
+        return new \MongoDB\Client(
+            $Confs['uri'],
+            $opts
+        );
+    }
+
+    public static function connections($conf)
+    {
+        if (! self::$instance instanceof self) {
             self::$instance = new self($conf);
         }
         return self::$instance;
     }
-
-    private function __clone() { }
-
-    private function __wakeup() { }
-
-
 }

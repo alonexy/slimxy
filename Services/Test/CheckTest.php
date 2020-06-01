@@ -1,22 +1,30 @@
 <?php
+
+declare(strict_types=1);
 /**
- * Created by PhpStorm.
- * User: alonexy
- * Date: 18/2/28
- * Time: 14:07
+ * This file is part of Slimxy.
+ *
+ * @link     http://www.alonexy.com
+ * @document https://www.slimframework.com/
  */
 
 namespace Services\Test;
 
 use Services\ServicesInterface;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class CheckTest implements ServicesInterface
 {
-    public function beforeAction($arr){
+    public function beforeAction($arr)
+    {
 //        echo 'sdsdsdsdsdsd<br>';
     }
 
-    public function behindAction($arr){
+    public function behindAction($arr)
+    {
 //        echo 'behindAction<br>';
     }
 }
