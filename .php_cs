@@ -77,7 +77,7 @@ return PhpCsFixer\Config::create()
     ->setFinder(
         PhpCsFixer\Finder::create()
             ->exclude('public')
-            ->exclude('runtime')
+            ->exclude('logs')
             ->exclude('vendor')
             ->in(__DIR__)
     )

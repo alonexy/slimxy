@@ -121,7 +121,7 @@ class HttpServer extends Command
         $container = new \Core\Containers();
         $app = new \Slim\App($container->GetContainers());
         require __DIR__ . '/../routes.php';
-        $port = getenv('HTTP_SERVER_PORT') ?: 8888;
+        $port = (int) getenv('HTTP_SERVER_PORT') ?: 8888;
 
         $http_server = new \Swoole\Http\Server('0.0.0.0', $port, SWOOLE_PROCESS, SWOOLE_SOCK_TCP);
         $http_server->set(
@@ -157,18 +157,18 @@ class HttpServer extends Command
         );
         $http_server->on(
             'request',
-            function ($request, $response) use ($app) {
+            function ($request, \Swoole\Http\Response $response) use ($app) {
                 $slimRequest = \Slim\Http\Request::createFromEnvironment(
                     new \Slim\Http\Environment(
-                    [
-                        'SERVER_PROTOCOL' => 'HTTP/1.1',
-                        'REQUEST_METHOD' => $request->server['request_method'],
-                        'REQUEST_URI' => $request->server['request_uri'],
-                        'SERVER_PORT' => $request->server['server_port'],
-                        'HTTP_ACCEPT' => $request->header['accept'],
-                        'HTTP_USER_AGENT' => $request->header['user-agent'],
-                    ]
-                )
+                        [
+                            'SERVER_PROTOCOL' => 'HTTP/1.1',
+                            'REQUEST_METHOD' => $request->server['request_method'],
+                            'REQUEST_URI' => $request->server['request_uri'],
+                            'SERVER_PORT' => $request->server['server_port'],
+                            'HTTP_ACCEPT' => $request->header['accept'],
+                            'HTTP_USER_AGENT' => $request->header['user-agent'],
+                        ]
+                    )
                 );
 
                 $body = new \Slim\Http\Body(fopen('php://temp', 'w'));
@@ -179,8 +179,13 @@ class HttpServer extends Command
                 $processedResponse = $app->process($slimRequest, new \Slim\Http\Response());
 
                 // Set all the headers you will find in $processedResponse into swoole's $response
-                $response->header('foo', 'bar');
-
+                foreach ($processedResponse->getHeaders() as $k => $v) {
+                    if (is_array($v)) {
+                        $response->header($k, $v[0]);
+                    } else {
+                        $response->header($k, $v);
+                    }
+                }
                 // Set the body
                 $response->end((string) $processedResponse->getBody());
             }
