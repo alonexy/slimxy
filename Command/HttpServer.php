@@ -182,8 +182,8 @@ class HttpServer extends Command
                     require __DIR__ . '/../routes.php';
                 }
                 $slimRequest->withMethod($request->server['request_method']);
-                $slimRequest = $slimRequest->withQueryParams($request->get);
-                $slimRequest = $slimRequest->withParsedBody($request->post);
+                $slimRequest = $slimRequest->withQueryParams($request->get??[]);
+                $slimRequest = $slimRequest->withParsedBody($request->post??[]);
                 $processedResponse = $app->process($slimRequest, new \Slim\Http\Response());
                 // Set all the headers you will find in $processedResponse into swoole's $response
                 foreach ($processedResponse->getHeaders() as $k => $v) {
