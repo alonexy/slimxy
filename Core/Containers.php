@@ -34,7 +34,9 @@ class Containers
         $this->container['logger'] = function ($c) {
             $logName = date('Y-m-d');
             $logger = new \Monolog\Logger($logName);
-            $file_handler = new \Monolog\Handler\StreamHandler(__DIR__ . '/../logs/' . $logName . '.log');
+            $file_handler = new \Monolog\Handler\StreamHandler(
+                __DIR__ . '/../logs/' . $logName . '.log'
+            );
             $logger->pushHandler($file_handler);
             return $logger;
         };
@@ -45,20 +47,35 @@ class Containers
         //  ======数据库配置=====
         $this->container['db'] = function ($c) {
             $db = $c['settings']['db'];
-            $dsn = 'mysql:host=' . $db['default']['host'] . ';dbname=' . $db['default']['dbname'] . ';charset=utf8';
-            return new \Slim\PDO\Database($dsn, $db['default']['user'], $db['default']['pass']);
+            $dsn =
+                'mysql:host=' .
+                $db['default']['host'] .
+                ';dbname=' .
+                $db['default']['dbname'] .
+                ';charset=utf8';
+            return new \Slim\PDO\Database(
+                $dsn,
+                $db['default']['user'],
+                $db['default']['pass']
+            );
         };
         //======视图=====
         $this->container['view'] = function ($c) {
-            $view = new \Slim\Views\Twig(
-                __DIR__ . '/../Templates',
-                [
-                    'cache' => false,
-                ]
-            );
+            $view = new \Slim\Views\Twig(__DIR__ . '/../Templates', [
+                'cache' => false,
+            ]);
             // Instantiate and add Slim specific extension
-            $basePath = rtrim(str_ireplace('index.php', '', $c['request']->getUri()->getBasePath()), '/');
-            $view->addExtension(new \Slim\Views\TwigExtension($c['router'], $basePath));
+            $basePath = rtrim(
+                str_ireplace(
+                    'index.php',
+                    '',
+                    $c['request']->getUri()->getBasePath()
+                ),
+                '/'
+            );
+            $view->addExtension(
+                new \Slim\Views\TwigExtension($c['router'], $basePath)
+            );
             return $view;
         };
         //==报错处理==
@@ -89,7 +106,7 @@ class Containers
         //配置更新
         $settings = $this->container->get('settings');
         $env = getenv('APP_ENV');
-        if (! in_array($env, ['local', 'production', 'test'])) {
+        if (!in_array($env, ['local', 'production', 'test'])) {
             $error = 'Set APP_ENV in (local,production,test)';
             throw new \Exception($error);
         }

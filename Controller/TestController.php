@@ -40,7 +40,7 @@ class TestController extends BaseController
         $dsn = "redis://auth:{$redisConfs['auth']}@{$redisConfs['host']}:{$redisConfs['port']}";
         \Resque::setBackend($dsn, $redisConfs['db_set']);
         $args = [
-            'name' => 'Chris',
+            'name' => 'Chrisr',
         ];
 
         $jobID = \Resque::enqueue('default', \Jobs\Test_Job::class, $args, true);
@@ -48,7 +48,6 @@ class TestController extends BaseController
             throw new \Exception('Job 投递失败', 1002);
         }
         $this->container->logger->info('jobID==>', [$jobID]);
-
         return $response->withJson(['job_id' => $jobID, 'msg' => 'suc', 'redisConfs' => $redisConfs]);
     }
 
@@ -57,6 +56,7 @@ class TestController extends BaseController
         $name = $request->getQueryParam('name', 'hi');
         return $this->view->render($response, 'test.php', [
             'name' => $name,
+            'ss'=>1
         ]);
     }
 }
