@@ -173,17 +173,32 @@ class HttpServer extends Command
                             'REQUEST_METHOD' => $request->server['request_method'],
                             'REQUEST_URI' => $request->server['request_uri'],
                             'SERVER_PORT' => $request->server['server_port'],
+                            'REQ_TIME_FLOAT' => $request->server['request_time_float'],
                             'HTTP_ACCEPT' => $request->header['accept'],
-                            'HTTP_USER_AGENT' => $request->header['user-agent'],
+                            'HTTP_USER_AGENT' => $request->header['user-agent']??"",
+                            'HTTP_HOST' => $request->header['host']??"",
+                            'HTTP_CONTENT_TYPE' => $request->header['content-type']??"",
                         ]
                     )
                 );
                 if(env('APP_ENV') === 'local'){
                     require __DIR__ . '/../routes.php';
                 }
+                $reqGet = $request->get??[];
+                $reqPost = $request->post??[];
+                //JSON
+                if(!empty($request->rawContent())){
+                    if(is_json($request->rawContent())){
+                        $JsonArr  = json_decode($request->rawContent(),true);
+                        if(!empty($JsonArr)){
+                            $reqPost = array_merge($reqPost,$JsonArr);
+                        }
+                    }
+                }
                 $slimRequest->withMethod($request->server['request_method']);
-                $slimRequest = $slimRequest->withQueryParams($request->get??[]);
-                $slimRequest = $slimRequest->withParsedBody($request->post??[]);
+                $slimRequest = $slimRequest->withQueryParams($reqGet);
+                $slimRequest = $slimRequest->withParsedBody($reqPost);
+
                 $processedResponse = $app->process($slimRequest, new \Slim\Http\Response());
                 // Set all the headers you will find in $processedResponse into swoole's $response
                 foreach ($processedResponse->getHeaders() as $k => $v) {
@@ -194,7 +209,7 @@ class HttpServer extends Command
                     }
                 }
                 // Set the body
-                $response->end((string) $processedResponse->getBody());
+                return $response->end((string) $processedResponse->getBody());
             }
         );
         $http_server->start();
