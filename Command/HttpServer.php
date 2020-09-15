@@ -3,7 +3,7 @@
 declare(strict_types=1);
 /**
  * This file is part of Slimxy.
- * @author   alonexy@qq.com
+ *
  * @link     http://www.alonexy.com
  * @document https://www.slimframework.com/
  */
@@ -121,7 +121,7 @@ class HttpServer extends Command
         $daemonize = $input->getOption('daemonize');
         $container = new \Core\Containers();
         $app = new \Slim\App($container->GetContainers());
-        if(env('APP_ENV') !== 'local'){
+        if (env('APP_ENV') !== 'local') {
             require __DIR__ . '/../routes.php';
         }
         $port = (int) env('SW_HTTP_SERVER_PORT') ?: 8888;
@@ -146,8 +146,7 @@ class HttpServer extends Command
         );
         $http_server->on(
             'WorkerStart',
-            function ($serv, $worker_id)  {
-
+            function ($serv, $worker_id) {
             }
         );
         $http_server->on(
@@ -175,23 +174,23 @@ class HttpServer extends Command
                             'SERVER_PORT' => $request->server['server_port'],
                             'REQ_TIME_FLOAT' => $request->server['request_time_float'],
                             'HTTP_ACCEPT' => $request->header['accept'],
-                            'HTTP_USER_AGENT' => $request->header['user-agent']??"",
-                            'HTTP_HOST' => $request->header['host']??"",
-                            'HTTP_CONTENT_TYPE' => $request->header['content-type']??"",
+                            'HTTP_USER_AGENT' => $request->header['user-agent'] ?? '',
+                            'HTTP_HOST' => $request->header['host'] ?? '',
+                            'HTTP_CONTENT_TYPE' => $request->header['content-type'] ?? '',
                         ]
                     )
                 );
-                if(env('APP_ENV') === 'local'){
+                if (env('APP_ENV') === 'local') {
                     require __DIR__ . '/../routes.php';
                 }
-                $reqGet = $request->get??[];
-                $reqPost = $request->post??[];
+                $reqGet = $request->get ?? [];
+                $reqPost = $request->post ?? [];
                 //JSON
-                if(!empty($request->rawContent())){
-                    if(is_json($request->rawContent())){
-                        $JsonArr  = json_decode($request->rawContent(),true);
-                        if(!empty($JsonArr)){
-                            $reqPost = array_merge($reqPost,$JsonArr);
+                if (! empty($request->rawContent())) {
+                    if (is_json($request->rawContent())) {
+                        $JsonArr = json_decode($request->rawContent(), true);
+                        if (! empty($JsonArr)) {
+                            $reqPost = array_merge($reqPost, $JsonArr);
                         }
                     }
                 }

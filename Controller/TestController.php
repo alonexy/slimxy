@@ -56,7 +56,7 @@ class TestController extends BaseController
         $name = $request->getQueryParam('name', 'hi');
         return $this->view->render($response, 'test.php', [
             'name' => $name,
-            'ss'=>1
+            'ss' => 1,
         ]);
     }
 }

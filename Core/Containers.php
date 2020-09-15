@@ -106,7 +106,7 @@ class Containers
         //配置更新
         $settings = $this->container->get('settings');
         $env = getenv('APP_ENV');
-        if (!in_array($env, ['local', 'production', 'test'])) {
+        if (! in_array($env, ['local', 'production', 'test'])) {
             $error = 'Set APP_ENV in (local,production,test)';
             throw new \Exception($error);
         }
